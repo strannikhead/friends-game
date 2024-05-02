@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
         }
         if (velocity.magnitude < 1e-3 && !isHolding)
         {
-            velocity = new Vector3(0.05f, 0, 0);
+            velocity = new Vector3(0.05f, 0, 0) * direction;
         }
         if (isGrounded)
         {

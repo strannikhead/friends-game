@@ -29,7 +29,7 @@ public class Escape : MonoBehaviour
             TimeSystem.Stop();
             UI.SetActive(false);
             player.SetActive(false);
-            eventSystem.SetActive(false);
+            eventSystem?.SetActive(false);
             SceneManager.LoadScene("ScoreScene", LoadSceneMode.Additive);
         }
     }

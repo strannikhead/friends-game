@@ -15,6 +15,7 @@ TagManager:
   - UI
   - DashRefresher
   - JumpRefresher
+  - Bonus
   layers:
   - Default
   - TransparentFX
