@@ -193,6 +193,11 @@ public class Player : MonoBehaviour
             dashCharge = 1;
             Destroy(collision.gameObject);
         }
+        if (collision.CompareTag("Bonus"))
+        {
+            ScoreSystem.score += collision.GetComponent<Bonus>().price;
+            Destroy(collision.gameObject);
+        }
         if (collision.CompareTag("LeftWall"))
         {
             currentStates.Add(states.LeftBlocked);
