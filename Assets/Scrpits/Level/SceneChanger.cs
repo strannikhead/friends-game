@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
-{ 
-    public void ChangeToLevel()
+{
+    [SerializeField]
+    public string sceneName;
+    public void ChangeToScene()
     {
-        SceneManager.LoadScene("MainMap");
+        SceneManager.LoadScene(sceneName);
     }
 }
