@@ -9,6 +9,7 @@ public class SceneChanger : MonoBehaviour
     public string sceneName;
     public void ChangeToScene()
     {
+        ScoreSystem.score = 0;
         SceneManager.LoadScene(sceneName);
     }
 }
