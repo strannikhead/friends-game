@@ -15,12 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMap.unity
     guid: 761d18b9835ae584bb555bc3155c28e5
   - enabled: 1
+    path: Assets/Scenes/LeaderBoard.unity
+    guid: ef2b546fb940c48438d37998abe7d0b4
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 152e2490b3b398942b2599577f532893
   - enabled: 1
     path: Assets/Scenes/Levels/FirstLevel.unity
     guid: 4bb7239ad3475bd459943d7ca3e0de67
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NewScene.unity
     guid: 6e96298ee95b27f4c81b5d8c59b78ed4
   - enabled: 1
