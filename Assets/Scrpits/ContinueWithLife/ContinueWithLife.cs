@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Continue : MonoBehaviour
+public class ContinueWithLife : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,8 +18,15 @@ public class Continue : MonoBehaviour
         
     }
 
-    public void Unload()
+    public void Continue()
     {
+        Game.lives--;
+        StartCoroutine(Unload());
+    }
+    private IEnumerator Unload()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log(MapModel.playerPos.sceneName);
         SceneManager.UnloadSceneAsync(MapModel.playerPos.sceneName);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }

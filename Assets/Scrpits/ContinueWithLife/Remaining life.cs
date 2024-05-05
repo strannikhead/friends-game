@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 
-public class FinalScore : MonoBehaviour
+public class Remaininglife : MonoBehaviour
 {
-    private TextMeshProUGUI textObject;
+    private TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
-        textObject = gameObject.GetComponent<TextMeshProUGUI>();
+        text = gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        textObject.text = Game.score.ToString();
+        text.text = $"Remaining lives: {Game.lives}";
     }
 }

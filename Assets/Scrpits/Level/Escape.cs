@@ -26,10 +26,13 @@ public class Escape : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
+            Game.levelScore = 0;
             TimeSystem.Stop();
             UI.SetActive(false);
             player.SetActive(false);
             eventSystem?.SetActive(false);
+            MapModel.playerPos.node.isVisited = true;
+            MapModel.playerPos.EnableNeibors();
             SceneManager.LoadScene("ScoreScene", LoadSceneMode.Additive);
         }
     }

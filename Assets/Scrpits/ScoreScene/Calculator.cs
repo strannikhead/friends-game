@@ -19,16 +19,7 @@ public class Calculator : MonoBehaviour
         countedTime = 0;
         elapsedTime = TimeSystem.ElapsedTime;
         levelInfo = Levels.levels
-            [SceneManager
-            .GetActiveScene()
-            .GetRootGameObjects()
-            .Select(x => x.gameObject.GetComponent<ScenePointer>())
-            .Where(x => x != null)
-            .FirstOrDefault()
-            .player
-            .GetComponent<MainMapPlayer>()
-            .location
-            .sceneName];
+            [MapModel.playerPos.sceneName];
         timeTreshold = levelInfo.TimeTreshold;
         timeBonus = levelInfo.MaxTimeBonus;
     }
@@ -43,7 +34,7 @@ public class Calculator : MonoBehaviour
         }
         else if (!isScored)
         {
-            ScoreSystem.score += (int)timeBonus;
+            Game.score += (int)timeBonus;
             TimeSystem.Reset();
             isScored = true;
         }

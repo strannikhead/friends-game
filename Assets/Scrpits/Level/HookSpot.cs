@@ -7,6 +7,7 @@ using UnityEngine;
 public class HookSpot : MonoBehaviour
 {
     public bool isHookable = false;
+    [SerializeField]
     private Player player;
     [SerializeField]
     private GameObject activeSpot;
@@ -26,11 +27,16 @@ public class HookSpot : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        Debug.Log(player.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            return;
+        }
         var ray = Physics2D.RaycastAll(transform.position, player.transform.position - transform.position);
         var rayHit = false;
         foreach (var hit in ray)

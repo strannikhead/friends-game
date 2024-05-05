@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/FirstLevel.unity
     guid: 4bb7239ad3475bd459943d7ca3e0de67
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NewScene.unity
     guid: 6e96298ee95b27f4c81b5d8c59b78ed4
   - enabled: 1
@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/SecondLevel.unity
     guid: bb6a1704715a3de4daf74f6f8abe35c7
+  - enabled: 1
+    path: Assets/Scenes/ContinueWithLifeScene.unity
+    guid: c68c2e27b3615454488611aeb4f67283
   m_configObjects: {}

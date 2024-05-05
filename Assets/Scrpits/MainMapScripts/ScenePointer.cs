@@ -23,7 +23,7 @@ public class ScenePointer : MonoBehaviour
         {
             player.SetActive(true);
             map.SetActive(true);
-            sceneCamera.GetComponent<AudioListener>().enabled = true;
+            sceneCamera.SetActive(true);
         }
     }
 }

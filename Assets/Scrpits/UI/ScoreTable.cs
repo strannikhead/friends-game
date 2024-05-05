@@ -15,6 +15,6 @@ public class ScoreTable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textObject.text = $"Score: {ScoreSystem.score}";
+        textObject.text = $"Score: {Game.score}";
     }
 }

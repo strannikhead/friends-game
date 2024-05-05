@@ -2,10 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,15 +13,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Vector3 acceleration = normAcceleration;
     [SerializeField]
-    private Vector3 jumpVelocity = new Vector3(0, 15, 0);
+    private Vector3 jumpVelocity = new(0, 15, 0);
     [SerializeField]
     private int direction = 1;
-    private float resistanceModule = 6f;
-    private float resistanceTreshold = 20f;
+    private readonly float resistanceModule = 6f;
+    private readonly float resistanceTreshold = 20f;
     private float xShift = 0;
-    private static Vector3 normAcceleration = new Vector3(0, -25f, 0);
-    private static Vector3 normVelocity = new Vector3(8f, 0, 0);
-    private enum states
+    private static Vector3 normAcceleration = new(0, -25f, 0);
+    private static Vector3 normVelocity = new(8f, 0, 0);
+    private enum States
     {
         Grounded,
         Roofed,
@@ -31,45 +30,45 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField]
-    private enum holds
+    private enum Holds
     {
         Left,
         Right
     }
 
-    private readonly Dictionary<states, AxesTransformation> statesEffects = new Dictionary<states, AxesTransformation>
+    private readonly Dictionary<States, AxesTransformation> statesEffects = new Dictionary<States, AxesTransformation>
     {
-        {states.Grounded, new AxesTransformation(x => false, x => x.y < 0)},
-        {states.Roofed, new AxesTransformation(x => false, x => x.y > 0) },
-        {states.LeftBlocked, new AxesTransformation(x => x.x > 0, x => false) },
-        {states.RightBlocked, new AxesTransformation(x => x.x < 0, x => false) }
+        {States.Grounded, new AxesTransformation(x => false, x => x.y < 0)},
+        {States.Roofed, new AxesTransformation(x => false, x => x.y > 0) },
+        {States.LeftBlocked, new AxesTransformation(x => x.x > 0, x => false) },
+        {States.RightBlocked, new AxesTransformation(x => x.x < 0, x => false) }
     };
     [SerializeField]
-    private List<states> currentStates = new ();
-    private List<holds> currentHolds = new ();
-    private bool isGrounded => currentStates.Contains(states.Grounded);
-    private bool isRoofed => currentStates.Contains(states.Roofed);
-    private bool isLeftBlocked => currentStates.Contains(states.LeftBlocked);
+    private readonly List<States> currentStates = new();
+    private readonly List<Holds> currentHolds = new();
+    private bool isGrounded => currentStates.Contains(States.Grounded);
+    private bool isRoofed => currentStates.Contains(States.Roofed);
+    private bool isLeftBlocked => currentStates.Contains(States.LeftBlocked);
     [SerializeField]
-    private bool isLeftHolding => currentHolds.Contains(holds.Left);
-    private bool isRightBlocked => currentStates.Contains(states.RightBlocked);
+    private bool isLeftHolding => currentHolds.Contains(Holds.Left);
+    private bool isRightBlocked => currentStates.Contains(States.RightBlocked);
     [SerializeField]
-    private bool isRightHolding => currentHolds.Contains(holds.Right);
+    private bool isRightHolding => currentHolds.Contains(Holds.Right);
     private bool isHolding => isLeftHolding || isRightHolding;
     [SerializeField]
     private bool isDashing = false;
     [SerializeField]
     private bool canDoubleJump = true;
-    private float hookAreaRadius = 2f;
-    private float hookTime = 0.5f;
-    private float dashTime = 0.3f;
-    private float dashDistance = 4f;
-    private float dashCooldown = 1.5f;
+    private readonly float hookAreaRadius = 2f;
+    private readonly float hookTime = 0.5f;
+    private readonly float dashTime = 0.3f;
+    private readonly float dashDistance = 4f;
+    private readonly float dashCooldown = 1.5f;
     public float dashCharge = 1;
     private bool canDash => dashCharge >= 1;
     private float dashRecharge = 0;
-    private float slidingDelay = 1f;
-    private Vector3 slidingAcceleration = new Vector3(0, -3f, 0);
+    private readonly float slidingDelay = 1f;
+    private readonly Vector3 slidingAcceleration = new Vector3(0, -3f, 0);
 
     public void ApplyAcceleration(Vector3 acceleration)
     {
@@ -148,7 +147,7 @@ public class Player : MonoBehaviour
                 velocity.x = normVelocity.x * direction;
             }
         }
-        foreach (var state in currentStates) 
+        foreach (var state in currentStates)
         {
             ApplyState(state);
         }
@@ -157,7 +156,7 @@ public class Player : MonoBehaviour
         velocity += acceleration * Time.deltaTime;
     }
 
-    private void ApplyState(states state)
+    private void ApplyState(States state)
     {
         velocity.x = statesEffects[state].X(velocity) ? 0 : velocity.x;
         velocity.y = statesEffects[state].Y(velocity) ? 0 : velocity.y;
@@ -196,31 +195,45 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bonus"))
         {
-            ScoreSystem.score += collision.GetComponent<Bonus>().price;
+            Game.score += collision.GetComponent<Bonus>().price;
+            Game.levelScore += collision.GetComponent<Bonus>().price;
             Destroy(collision.gameObject);
         }
         if (collision.CompareTag("LeftWall"))
         {
-            currentStates.Add(states.LeftBlocked);
+            currentStates.Add(States.LeftBlocked);
         }
         if (collision.CompareTag("RightWall"))
         {
-            currentStates.Add(states.RightBlocked);
+            currentStates.Add(States.RightBlocked);
         }
         if (collision.CompareTag("Ground"))
         {
-            Debug.Log("Enter");
-            currentStates.Add(states.Grounded);
+            currentStates.Add(States.Grounded);
         }
         if (collision.CompareTag("Roof"))
         {
-            currentStates.Add(states.Roofed);
+            currentStates.Add(States.Roofed);
         }
         if (collision.CompareTag("Death"))
         {
             TimeSystem.Reset();
             TimeSystem.Stop();
-            SceneManager.LoadScene("LoseScene");
+            if (Game.lives == 0)
+            {
+                Game.score -= Game.levelScore; 
+                SceneManager.LoadScene("LoseScene");
+            }
+            else
+            {
+                Game.score -= Game.levelScore; 
+                Game.levelScore = 0;
+                var UI = FindAnyObjectByType<Canvas>().gameObject;
+                var eventSystem = GameObject.Find("EventSystem");
+                UI.SetActive(false);
+                eventSystem?.SetActive(false);
+                SceneManager.LoadScene("ContinueWithLifeScene", LoadSceneMode.Additive);
+            }
             Destroy(gameObject);
         }
         if (collision.CompareTag("LeftHoldable"))
@@ -228,11 +241,11 @@ public class Player : MonoBehaviour
             direction = -1;
             if (!isLeftHolding)
             {
-                currentStates.Add(states.LeftBlocked);
-                currentStates.Add(states.Grounded);
+                currentStates.Add(States.LeftBlocked);
+                currentStates.Add(States.Grounded);
                 velocity = Vector3.zero;
             }
-            currentHolds.Add(holds.Left);
+            currentHolds.Add(Holds.Left);
             StartCoroutine(Sliding());
         }
         if (collision.CompareTag("RightHoldable"))
@@ -240,11 +253,11 @@ public class Player : MonoBehaviour
             direction = 1;
             if (!isRightHolding)
             {
-                currentStates.Add(states.RightBlocked);
-                currentStates.Add(states.Grounded);
+                currentStates.Add(States.RightBlocked);
+                currentStates.Add(States.Grounded);
                 velocity = Vector3.zero;
             }
-            currentHolds.Add(holds.Right);
+            currentHolds.Add(Holds.Right);
             StartCoroutine(Sliding());
         }
     }
@@ -253,40 +266,36 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Ground"))
         {
-            Debug.Log("Exit");
-            currentStates.Remove(states.Grounded);
+            currentStates.Remove(States.Grounded);
         }
         if (collision.CompareTag("LeftWall"))
         {
-            currentStates.Remove(states.LeftBlocked);
+            currentStates.Remove(States.LeftBlocked);
         }
         if (collision.CompareTag("RightWall"))
         {
-            currentStates.Remove(states.RightBlocked);
+            currentStates.Remove(States.RightBlocked);
         }
         if (collision.CompareTag("Roof"))
         {
-            currentStates.Remove(states.Roofed);
+            currentStates.Remove(States.Roofed);
         }
         if (collision.CompareTag("LeftHoldable"))
         {
-            Debug.Log("LeftLeft");
-            Debug.Log(transform.position);
-            currentHolds.Remove(holds.Left);
+            currentHolds.Remove(Holds.Left);
             if (!isLeftHolding)
             {
-                currentStates.Remove(states.LeftBlocked);
-                currentStates.Remove(states.Grounded);
+                currentStates.Remove(States.LeftBlocked);
+                currentStates.Remove(States.Grounded);
             }
         }
         if (collision.CompareTag("RightHoldable"))
         {
-            Debug.Log("LeftRight");
-            currentHolds.Remove(holds.Right);
+            currentHolds.Remove(Holds.Right);
             if (!isRightHolding)
             {
-                currentStates.Remove(states.RightBlocked);
-                currentStates.Remove(states.Grounded);
+                currentStates.Remove(States.RightBlocked);
+                currentStates.Remove(States.Grounded);
             }
         }
     }
@@ -307,7 +316,6 @@ public class Player : MonoBehaviour
     private void JumpInDirection(Vector3 direction)
     {
         velocity += jumpVelocity.magnitude * direction.normalized;
-        Debug.Log(velocity);
     }
 
     private IEnumerator Sliding()
@@ -315,7 +323,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(slidingDelay);
         if (isHolding)
         {
-            currentStates.Remove(states.Grounded);
+            currentStates.Remove(States.Grounded);
             acceleration = slidingAcceleration;
         }
     }
@@ -339,12 +347,6 @@ public class Player : MonoBehaviour
             velocity = normVelocity * this.direction;
         }
         isDashing = false;
-        Debug.Log(velocity);
-        Debug.Log(acceleration);
-        Debug.Log(dashCharge);
-        Debug.Log(transform.position);
-        Debug.Log(currentHolds.Count);
-        Debug.Log(currentStates.Count);
     }
 }
 namespace System.Runtime.CompilerServices

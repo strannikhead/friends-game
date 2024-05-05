@@ -1,53 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MapNode : MonoBehaviour
+class MapNode : MonoBehaviour
 {
-    [SerializeField]
-    public string sceneName;
+    public string sceneName => node.SceneName;
     [SerializeField]
     private List<MapNode> neighbors;
-    public bool isEnabled;
-    public bool isVisited;
+    [SerializeField]
+    public int id;
+    public Node node;
     // Start is called before the first frame update
     void Start()
     {
+        node = MapModel.nodes[id];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (node.isVisited)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            return;
+        }
+        if (node.isEnabled)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            return;
+        }
+        gameObject.GetComponent<SpriteRenderer>().color = Color.black;
     }
 
     public void Enable()
     {
-        if (isVisited)
+        if (node.isVisited)
         {
             return;
         }
-        isEnabled = true;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        node.isEnabled = true;
     }
 
     public void Disable()
     {
-        if (isVisited)
+        if (node.isVisited)
         {
             return;
         }
-        isEnabled = false;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        node.isEnabled = false;
     }
 
     public void EnableNeibors()
     {
-        foreach (var neighbor in neighbors)
+        var neibors = node.NeiborIds.Select(x => MapModel.nodes[x]);
+        foreach (var neighbor in neibors)
         {
-            neighbor.Enable();
+            neighbor.isEnabled = true;
         }
     }
 
@@ -55,7 +66,7 @@ public class MapNode : MonoBehaviour
     {
         foreach(var neighbor in neighbors)
         {
-            neighbor.Disable();
+            neighbor.node.isEnabled = false;
         }
     }
 
@@ -66,12 +77,15 @@ public class MapNode : MonoBehaviour
 
     public void LoadThisScene()
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        SceneManager.LoadScene(node.SceneName, LoadSceneMode.Additive);
         FindAnyObjectByType<MainMapPlayer>().gameObject.SetActive(false);
-        GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
+        StartCoroutine(TurnSceneOff());
+    }
+
+    private IEnumerator TurnSceneOff()
+    {
+        yield return new WaitForSeconds(1);
         GameObject.Find("Map").SetActive(false);
-        isVisited = true;
-        EnableNeibors();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+        GameObject.Find("Main Camera").SetActive(false);
     }
 }

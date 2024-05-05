@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMapPlayer : MonoBehaviour
 {
     [SerializeField]
-    public MapNode location;
+    private MapNode startNode;
     private readonly float movingTime = 1f;
     private Vector3 velocity;
     // Start is called before the first frame update
     void Start()
     {
-        location.Enable();
+        MapModel.Initialize(Resources
+            .FindObjectsOfTypeAll(typeof(MapNode))
+            .Select(x => x.GetComponent<MapNode>())
+            .ToArray(), startNode);
+        MapModel.playerPos.Enable();
     }
 
     // Update is called once per frame
@@ -25,17 +30,17 @@ public class MainMapPlayer : MonoBehaviour
                 .Select(obj => obj.gameObject.GetComponent<MapNode>())
                 .Where(obj => obj != null)
                 .FirstOrDefault();
-            if (targetNode != null && targetNode.isEnabled && !targetNode.Equals(location))
+            if (targetNode != null && targetNode.node.isEnabled && !targetNode.Equals(MapModel.playerPos))
             {
-                location = targetNode;
-                StartCoroutine(ChangePosition(location.transform.position));
+                MapModel.playerPos = targetNode;
+                StartCoroutine(ChangePosition(MapModel.playerPos.transform.position));
             }
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!location.isVisited)
+            if (!MapModel.playerPos.node.isVisited)
             {
-                location.LoadThisScene();
+                MapModel.playerPos.LoadThisScene();
             }
         }
     }
@@ -51,10 +56,10 @@ public class MainMapPlayer : MonoBehaviour
         velocity = (newPosition - transform.position) / movingTime;
         yield return new WaitForSeconds(movingTime);
         velocity = Vector3.zero;
-        if (location.isVisited)
+        if (MapModel.playerPos.node.isVisited)
         {
-            location.EnableNeibors();
+            MapModel.playerPos.EnableNeibors();
         }
-        location.Enable();
+        MapModel.playerPos.Enable();
     }
 }
