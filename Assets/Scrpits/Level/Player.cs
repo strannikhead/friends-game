@@ -221,7 +221,6 @@ public class Player : MonoBehaviour
             TimeSystem.Stop();
             if (Game.lives == 0)
             {
-                Game.score -= Game.levelScore; 
                 SceneManager.LoadScene("LoseScene");
             }
             else
