@@ -26,6 +26,7 @@ public class Escape : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
+            Game.lives += 1;
             Game.levelScore = 0;
             TimeSystem.Stop();
             UI.SetActive(false);
