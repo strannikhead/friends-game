@@ -8,8 +8,8 @@ public static class Levels
     public static Dictionary<string, LevelInfo> levels = new Dictionary<string, LevelInfo>
     {
         {"FirstLevel", new LevelInfo(1000, 19, 20)},
-        {"SecondLevel", new LevelInfo(1000, 10, 50)},
-        {"ThirdLevel", new LevelInfo(1000, 60, 3)}
+        {"SecondLevel", new LevelInfo(1000, 10, 10)},
+        {"ThirdLevel", new LevelInfo(1000, 60, 10)}
     };
 }
 
