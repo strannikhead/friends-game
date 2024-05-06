@@ -222,12 +222,15 @@ public class Player : MonoBehaviour
             if (Game.lives == 0)
             {
                 MapModel.Reset();
+                Game.Reset();
+                TimeSystem.Reset();
                 SceneManager.LoadScene("LoseScene");
             }
             else
             {
                 Game.score -= Game.levelScore; 
                 Game.levelScore = 0;
+                TimeSystem.Reset();
                 var UI = FindAnyObjectByType<Canvas>().gameObject;
                 var eventSystem = GameObject.Find("EventSystem");
                 UI.SetActive(false);

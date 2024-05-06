@@ -10,6 +10,7 @@ public class MainMapPlayer : MonoBehaviour
     private MapNode startNode;
     private readonly float movingTime = 1f;
     private Vector3 velocity;
+    [SerializeField]
     private bool isMoving = false;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class MainMapPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isMoving)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,7 +48,7 @@ public class MainMapPlayer : MonoBehaviour
                 MapModel.playerPos.LoadThisScene();
             }
         }
-        if (gameObject.transform.position != MapModel.playerPos.transform.position && !isMoving)
+        if ((gameObject.transform.position - MapModel.playerPos.transform.position).magnitude >= 10e-2)
         {
             isMoving = true;
             StartCoroutine(ChangePosition(MapModel.playerPos.transform.position));
