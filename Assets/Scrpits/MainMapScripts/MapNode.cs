@@ -12,11 +12,10 @@ class MapNode : MonoBehaviour
     private List<MapNode> neighbors;
     [SerializeField]
     public int id;
-    public Node node;
+    public Node node => MapModel.nodes[id];
     // Start is called before the first frame update
     void Start()
     {
-        node = MapModel.nodes[id];
     }
 
     // Update is called once per frame

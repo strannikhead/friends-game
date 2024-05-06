@@ -221,6 +221,7 @@ public class Player : MonoBehaviour
             TimeSystem.Stop();
             if (Game.lives == 0)
             {
+                MapModel.Reset();
                 SceneManager.LoadScene("LoseScene");
             }
             else

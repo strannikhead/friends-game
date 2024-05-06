@@ -10,6 +10,7 @@ public class MainMapPlayer : MonoBehaviour
     private MapNode startNode;
     private readonly float movingTime = 1f;
     private Vector3 velocity;
+    private bool isMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,6 @@ public class MainMapPlayer : MonoBehaviour
             if (targetNode != null && targetNode.node.isEnabled && !targetNode.Equals(MapModel.playerPos))
             {
                 MapModel.playerPos = targetNode;
-                StartCoroutine(ChangePosition(MapModel.playerPos.transform.position));
             }
         }
         if (Input.GetKeyDown(KeyCode.Space))
@@ -42,6 +42,11 @@ public class MainMapPlayer : MonoBehaviour
             {
                 MapModel.playerPos.LoadThisScene();
             }
+        }
+        if (gameObject.transform.position != MapModel.playerPos.transform.position && !isMoving)
+        {
+            isMoving = true;
+            StartCoroutine(ChangePosition(MapModel.playerPos.transform.position));
         }
     }
 
@@ -61,5 +66,6 @@ public class MainMapPlayer : MonoBehaviour
             MapModel.playerPos.EnableNeibors();
         }
         MapModel.playerPos.Enable();
+        isMoving = false;
     }
 }

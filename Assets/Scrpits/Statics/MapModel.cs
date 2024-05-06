@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 static class MapModel
 {
-    public static Dictionary<int, Node> nodes = new()
+    private static Func<Dictionary<int, Node>> originalNodes = () => new()
     {
         {1, new Node(new int[]{2}, 1, "FirstLevel") },
         {2, new Node(new int[]{1,3}, 2, "FirstLevel") },
         {3, new Node(new int[]{2,4}, 3, "SecondLevel") },
         {4, new Node(new int[]{3}, 4, "ThirdLevel") },
     };
+    public static Dictionary<int, Node> nodes = originalNodes();
     public static MapNode playerPos;
 
     public static void Initialize(MapNode[] mapNodes, MapNode start)
@@ -21,6 +25,11 @@ static class MapModel
         {
             nodes[i+1].MapNode = mapNodes[i];
         }
+    }
+
+    public static void Reset()
+    {
+        nodes = originalNodes();
     }
 }
 
