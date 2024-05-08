@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Calculator : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject button;
     public float elapsedTime;
     private LevelInfo levelInfo;
     public float timeTreshold;
@@ -16,6 +19,7 @@ public class Calculator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        button.SetActive(false);
         countedTime = 0;
         elapsedTime = TimeSystem.ElapsedTime;
         levelInfo = Levels.levels
@@ -37,6 +41,7 @@ public class Calculator : MonoBehaviour
             Game.score += (int)timeBonus;
             TimeSystem.Reset();
             isScored = true;
+            button.SetActive(true);
         }
     }
 }
