@@ -21,6 +21,13 @@ public class Player : MonoBehaviour
     private float xShift = 0;
     private static Vector3 normAcceleration = new(0, -25f, 0);
     private static Vector3 normVelocity = new(8f, 0, 0);
+    
+    public event Action OnJump;
+    public event Action OnDash;
+    public event Action OnHook;
+    public event Action OnMoving;
+    public event Action OnNotMoving;
+    
     private enum States
     {
         Grounded,
@@ -90,6 +97,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isGrounded && !isLeftBlocked)
+        {
+            OnMoving?.Invoke();
+        }
+        else
+            OnNotMoving?.Invoke();
+        
         xShift = Input.GetAxis("Horizontal");
         if (isDashing)
         {
@@ -109,6 +123,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
+            OnDash?.Invoke();
             StartCoroutine(DashTo(dashTime, dashCooldown, transform.position + new Vector3(dashDistance, 0, 0) * direction, false));
         }
         if (Input.GetMouseButtonDown(0))
@@ -116,6 +131,7 @@ public class Player : MonoBehaviour
             var hookPos = FindClosestHookPos();
             if (hookPos != null && hookPos.isHookable)
             {
+                OnHook?.Invoke();
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
             }
         }
@@ -307,10 +323,12 @@ public class Player : MonoBehaviour
     {
         if (isGrounded || isHolding)
         {
+            OnJump?.Invoke();
             velocity.y = jumpVelocity.y;
         }
         else if (canDoubleJump)
         {
+            OnJump?.Invoke();
             velocity.y = jumpVelocity.y;
             canDoubleJump = false;
         }
