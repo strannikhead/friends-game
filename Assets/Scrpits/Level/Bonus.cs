@@ -1,21 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Bonus : MonoBehaviour
 {
-    [SerializeField]
     public int price;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private AudioClip audioClip;
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        AudioSource.PlayClipAtPoint(audioClip, transform.position, 0.4f);
     }
 }
