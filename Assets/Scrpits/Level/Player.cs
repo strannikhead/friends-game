@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
                 MapModel.Reset();
                 Game.Reset();
                 TimeSystem.Reset();
-                SceneManager.LoadScene("LoseScene");
+                SceneManager.LoadScene("AnimatedLoseScene");
             }
             else
             {
