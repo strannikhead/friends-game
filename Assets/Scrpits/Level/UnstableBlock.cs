@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnstableBlock : MonoBehaviour
 {
+    [SerializeField]
     private float vanishTime = 0.2f;
     // Start is called before the first frame update
     void Start()

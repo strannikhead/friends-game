@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         {
             acceleration = normAcceleration;
         }
-        if (velocity.magnitude > resistanceTreshold && !isDashing)
+        if (velocity.magnitude > resistanceTreshold && !isDashing && !isHolding)
         {
             acceleration = normAcceleration - velocity.normalized * resistanceModule;
         }
