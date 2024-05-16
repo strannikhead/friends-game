@@ -259,6 +259,7 @@ public class Player : MonoBehaviour
             direction = -1;
             if (!isLeftHolding)
             {
+                acceleration.x = 0;
                 currentStates.Add(States.LeftBlocked);
                 currentStates.Add(States.Grounded);
                 velocity = Vector3.zero;
@@ -271,6 +272,7 @@ public class Player : MonoBehaviour
             direction = 1;
             if (!isRightHolding)
             {
+                acceleration.x = 0;
                 currentStates.Add(States.RightBlocked);
                 currentStates.Add(States.Grounded);
                 velocity = Vector3.zero;
