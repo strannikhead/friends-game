@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public event Action OnHook;
     public event Action OnMoving;
     public event Action OnNotMoving;
+    public event Action OnBonus;
     
     private enum States
     {
@@ -210,6 +211,7 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bonus"))
         {
+            OnBonus?.Invoke();
             Game.score += collision.GetComponent<Bonus>().price;
             Game.levelScore += collision.GetComponent<Bonus>().price;
             Destroy(collision.gameObject);
