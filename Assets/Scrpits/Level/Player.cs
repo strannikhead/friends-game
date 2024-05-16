@@ -53,9 +53,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private readonly List<States> currentStates = new();
     private readonly List<Holds> currentHolds = new();
-    private bool isGrounded => currentStates.Contains(States.Grounded);
+    public bool isGrounded => currentStates.Contains(States.Grounded);
     private bool isRoofed => currentStates.Contains(States.Roofed);
-    private bool isLeftBlocked => currentStates.Contains(States.LeftBlocked);
+    public bool isLeftBlocked => currentStates.Contains(States.LeftBlocked);
     [SerializeField]
     private bool isLeftHolding => currentHolds.Contains(Holds.Left);
     private bool isRightBlocked => currentStates.Contains(States.RightBlocked);
