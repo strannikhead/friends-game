@@ -9,7 +9,8 @@ public static class Levels
     {
         {"FirstLevel", new LevelInfo(1000, 19, 20)},
         {"SecondLevel", new LevelInfo(1000, 10, 10)},
-        {"ThirdLevel", new LevelInfo(1000, 60, 10)}
+        {"ThirdLevel", new LevelInfo(1000, 60, 10)},
+        {"FourthLevel", new LevelInfo(1000, 30, 5) }
     };
 }
 

@@ -9,7 +9,7 @@ static class MapModel
     private static Func<Dictionary<int, Node>> originalNodes = () => new()
     {
         {1, new Node(new int[]{2}, 1, "FirstLevel") },
-        {2, new Node(new int[]{1,3}, 2, "FirstLevel") },
+        {2, new Node(new int[]{1,3}, 2, "FourthLevel") },
         {3, new Node(new int[]{2,4}, 3, "SecondLevel") },
         {4, new Node(new int[]{3}, 4, "ThirdLevel") },
     };
