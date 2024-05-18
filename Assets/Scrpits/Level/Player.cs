@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
             if (hookPos != null && hookPos.isHookable)
             {
                 OnHook?.Invoke();
+                StartCoroutine(hookPos.EnterCooldown());
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
             }
         }
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour
         }
         if (velocity.magnitude < 1e-3 && !isHolding)
         {
-            velocity = new Vector3(0.05f, 0, 0) * direction;
+            velocity = new Vector3(0.08f, 0, 0) * direction;
         }
         if (isGrounded)
         {
@@ -344,12 +345,16 @@ public class Player : MonoBehaviour
 
     private IEnumerator Sliding()
     {
-        yield return new WaitForSeconds(slidingDelay);
-        if (isHolding)
+        for (var i = 0; i < 20;  i++) 
         {
-            currentStates.Remove(States.Grounded);
-            acceleration = slidingAcceleration;
+            yield return new WaitForSeconds(slidingDelay / 20);
+            if (!isHolding)
+            {
+                yield break;
+            }
         }
+        currentStates.Remove(States.Grounded);
+        acceleration = slidingAcceleration;
     }
 
     private IEnumerator DashTo(float dashTime, float dashCooldown, Vector3 target, bool saveVelocity)
