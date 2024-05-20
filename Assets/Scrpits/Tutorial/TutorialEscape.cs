@@ -21,7 +21,7 @@ public class TutorialEscape : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            SceneManager.LoadSceneAsync("MainMenu");
         }
     }
 }
