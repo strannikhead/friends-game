@@ -11,6 +11,10 @@ public class FinalScore : MonoBehaviour
     void Start()
     {
         textObject = gameObject.GetComponent<TextMeshProUGUI>();
+        
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager.AddScore("Player", Game.score);
+
     }
 
     // Update is called once per frame
