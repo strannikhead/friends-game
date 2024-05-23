@@ -51,6 +51,12 @@ public class ScoreManager : MonoBehaviour
     {
         return scoreBoard.highScores;
     }
+
+    public void Reset()
+    {
+        scoreBoard = new ScoreBoard();
+        SaveScores();
+    }
 }
 
 [Serializable]

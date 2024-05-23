@@ -21,4 +21,10 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(nextScene);
     }
+
+    public void ResetLeaderBoard()
+    {
+        var scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager.Reset();
+    }
 }
