@@ -33,10 +33,8 @@ public class ScoreManager : MonoBehaviour
         ScoreEntry newScore = new ScoreEntry(playerName, score);
         scoreBoard.highScores.Add(newScore);
 
-        // Сортировка результатов по убыванию
-        scoreBoard.highScores.Sort((x, y) => y.score.CompareTo(x.score));
+        scoreBoard.highScores.Sort((x, y) => -y.score.CompareTo(x.score));
 
-        // Оставить только 5 лучших результатов
         if (scoreBoard.highScores.Count > 5)
             scoreBoard.highScores = scoreBoard.highScores.GetRange(0, 5);
 

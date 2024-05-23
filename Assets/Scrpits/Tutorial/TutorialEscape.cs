@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class TutorialEscape : MonoBehaviour
+{
+    private ScoreManager scoreManager;
+    // Start is called before the first frame update
+    void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            scoreManager.AddScore("tutorialPlayer", Game.score);
+            SceneManager.LoadSceneAsync("MainMenu");
+        }
+    }
+}
