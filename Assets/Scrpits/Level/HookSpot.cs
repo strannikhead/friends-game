@@ -7,6 +7,7 @@ using UnityEngine;
 public class HookSpot : MonoBehaviour
 {
     public bool isHookable = false;
+    private bool isOnCooldown = false;
     [SerializeField]
     private Player player;
     [SerializeField]
@@ -14,6 +15,8 @@ public class HookSpot : MonoBehaviour
     private GameObject instanciatedSpot;
     [SerializeField]
     private float hookRange = 5;
+    [SerializeField]
+    private float cooldown = 2;
     private readonly HashSet<string> blockSightTags = new HashSet<string>
     {
         "Ground",
@@ -37,6 +40,17 @@ public class HookSpot : MonoBehaviour
         {
             return;
         }
+        var isInRange = (player.transform.position - transform.position).magnitude < hookRange;
+        if (!isInRange || isOnCooldown)
+        {
+            if (instanciatedSpot != null)
+            {
+                Destroy(instanciatedSpot);
+                isHookable = false;
+                instanciatedSpot = null;
+            }
+            return;
+        }
         var ray = Physics2D.RaycastAll(transform.position, player.transform.position - transform.position);
         var rayHit = false;
         foreach (var hit in ray)
@@ -52,8 +66,7 @@ public class HookSpot : MonoBehaviour
                 break;
             }
         }
-        if ((player.transform.position - transform.position).magnitude < hookRange
-            && rayHit) 
+        if (rayHit) 
         {
             if (!isHookable)
             {
@@ -70,5 +83,13 @@ public class HookSpot : MonoBehaviour
                 instanciatedSpot = null;
             }
         }
+    }
+
+    public IEnumerator EnterCooldown()
+    {
+        isHookable = false;
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isOnCooldown = false;
     }
 }

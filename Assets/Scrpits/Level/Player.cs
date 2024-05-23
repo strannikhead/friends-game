@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public event Action OnHook;
     public event Action OnMoving;
     public event Action OnNotMoving;
+    public event Action OnBonus;
     
     private enum States
     {
@@ -52,9 +53,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private readonly List<States> currentStates = new();
     private readonly List<Holds> currentHolds = new();
-    private bool isGrounded => currentStates.Contains(States.Grounded);
+    public bool isGrounded => currentStates.Contains(States.Grounded);
     private bool isRoofed => currentStates.Contains(States.Roofed);
-    private bool isLeftBlocked => currentStates.Contains(States.LeftBlocked);
+    public bool isLeftBlocked => currentStates.Contains(States.LeftBlocked);
     [SerializeField]
     private bool isLeftHolding => currentHolds.Contains(Holds.Left);
     private bool isRightBlocked => currentStates.Contains(States.RightBlocked);
@@ -131,6 +132,7 @@ public class Player : MonoBehaviour
             if (hookPos != null && hookPos.isHookable)
             {
                 OnHook?.Invoke();
+                StartCoroutine(hookPos.EnterCooldown());
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
             }
         }
@@ -152,7 +154,7 @@ public class Player : MonoBehaviour
         }
         if (velocity.magnitude < 1e-3 && !isHolding)
         {
-            velocity = new Vector3(0.05f, 0, 0) * direction;
+            velocity = new Vector3(0.08f, 0, 0) * direction;
         }
         if (isGrounded)
         {
@@ -210,6 +212,7 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bonus"))
         {
+            OnBonus?.Invoke();
             Game.score += collision.GetComponent<Bonus>().price;
             Game.levelScore += collision.GetComponent<Bonus>().price;
             Destroy(collision.gameObject);
@@ -342,12 +345,16 @@ public class Player : MonoBehaviour
 
     private IEnumerator Sliding()
     {
-        yield return new WaitForSeconds(slidingDelay);
-        if (isHolding)
+        for (var i = 0; i < 20;  i++) 
         {
-            currentStates.Remove(States.Grounded);
-            acceleration = slidingAcceleration;
+            yield return new WaitForSeconds(slidingDelay / 20);
+            if (!isHolding)
+            {
+                yield break;
+            }
         }
+        currentStates.Remove(States.Grounded);
+        acceleration = slidingAcceleration;
     }
 
     private IEnumerator DashTo(float dashTime, float dashCooldown, Vector3 target, bool saveVelocity)

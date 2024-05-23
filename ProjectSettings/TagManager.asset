@@ -16,6 +16,9 @@ TagManager:
   - DashRefresher
   - JumpRefresher
   - Bonus
+  - Hint
+  - Change
+  - Disable
   layers:
   - Default
   - TransparentFX
