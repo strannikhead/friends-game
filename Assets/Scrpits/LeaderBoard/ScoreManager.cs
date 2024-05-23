@@ -52,7 +52,7 @@ public class ScoreManager : MonoBehaviour
         return scoreBoard.highScores;
     }
 
-    public void Reset()
+    public void ResetRecords()
     {
         scoreBoard = new ScoreBoard();
         SaveScores();
