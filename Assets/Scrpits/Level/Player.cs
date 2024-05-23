@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isRightHolding => currentHolds.Contains(Holds.Right);
     private bool isHolding => isLeftHolding || isRightHolding;
+    private bool isLeftTouched;
+    private bool isRightTouched;
     [SerializeField]
     private bool isDashing = false;
     [SerializeField]
@@ -260,8 +262,17 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("LeftHoldable"))
         {
             direction = -1;
+            if (!isLeftTouched)
+            {
+                // повернули в сторону
+                isLeftTouched = true;
+                transform.Rotate(0, 180, 0);
+            }
             if (!isLeftHolding)
             {
+                // повернули обратно
+                isLeftTouched = false;
+                transform.Rotate(0, 180, 0);
                 acceleration.x = 0;
                 currentStates.Add(States.LeftBlocked);
                 currentStates.Add(States.Grounded);
@@ -273,8 +284,16 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("RightHoldable"))
         {
             direction = 1;
+            if (!isRightTouched)
+            {
+                // повернули в сторону
+                isRightTouched = true;
+                transform.Rotate(0, 180, 0);
+            }
             if (!isRightHolding)
             {
+                // повернули обратно
+                isRightTouched = false;
                 acceleration.x = 0;
                 currentStates.Add(States.RightBlocked);
                 currentStates.Add(States.Grounded);
