@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
     public event Action OnJump;
     public event Action OnDash;
     public event Action OnHook;
-    public event Action OnMoving;
-    public event Action OnNotMoving;
+    public event Action OnStartMoving;
+    public event Action OnStopMoving;
     public event Action OnBonus;
     
     private enum States
@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     private bool isHolding => isLeftHolding || isRightHolding;
     private bool isLeftTouched;
     private bool isRightTouched;
+    private bool isMoving;
     [SerializeField]
     private bool isDashing = false;
     [SerializeField]
@@ -99,12 +100,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded && !isLeftBlocked)
+        Debug.Log(isMoving);
+        if (isGrounded && !isLeftBlocked && !isMoving)
         {
-            OnMoving?.Invoke();
+            OnStartMoving?.Invoke();
+            isMoving = true;
         }
         else
-            OnNotMoving?.Invoke();
+        {
+            OnStopMoving?.Invoke();
+            isMoving = false;
+        }
         
         xShift = Input.GetAxis("Horizontal");
         if (isDashing)
