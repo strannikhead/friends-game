@@ -79,7 +79,11 @@ public class Player : MonoBehaviour
     private float dashRecharge = 0;
     private readonly float slidingDelay = 1f;
     private readonly Vector3 slidingAcceleration = new Vector3(0, -3f, 0);
-
+    
+    private LineRenderer lineRenderer;
+    private LineRenderer hookPosition;
+    private bool isHooking;
+    
     public void ApplyAcceleration(Vector3 acceleration)
     {
         this.acceleration += acceleration;
@@ -95,12 +99,16 @@ public class Player : MonoBehaviour
     {
         acceleration = normAcceleration;
         velocity = normVelocity;
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 2;
+        
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isMoving);
         if (isGrounded && !isLeftBlocked && !isMoving)
         {
             OnStartMoving?.Invoke();
@@ -110,6 +118,12 @@ public class Player : MonoBehaviour
         {
             OnStopMoving?.Invoke();
             isMoving = false;
+        }
+        
+        if (isHooking)
+        {
+            lineRenderer.SetPosition(0, transform.position); // Начало луча в позиции объекта
+            lineRenderer.SetPosition(1, FindClosestHookPos().transform.position);
         }
         
         xShift = Input.GetAxis("Horizontal");
@@ -140,6 +154,7 @@ public class Player : MonoBehaviour
             if (hookPos != null && hookPos.isHookable)
             {
                 OnHook?.Invoke();
+                isHooking = true;
                 StartCoroutine(hookPos.EnterCooldown());
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
             }
@@ -391,6 +406,9 @@ public class Player : MonoBehaviour
             dashRecharge = 1 / dashCooldown;
         }
         var direction = target - transform.position;
+
+        Ray ray = new Ray(transform.position, direction);
+        
         velocity = Vector3.zero;
         acceleration = Vector3.zero;
         yield return new WaitForSeconds(0.01f);
@@ -400,6 +418,10 @@ public class Player : MonoBehaviour
         {
             velocity = normVelocity * this.direction;
         }
+
+        isHooking = false;
+        lineRenderer.SetPosition(0, Vector3.zero); // Начало луча в позиции объекта
+        lineRenderer.SetPosition(1, Vector3.zero);
         isDashing = false;
     }
 }
