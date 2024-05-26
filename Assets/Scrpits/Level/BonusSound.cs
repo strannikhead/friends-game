@@ -22,7 +22,7 @@ public class BonusSound : MonoBehaviour
         if (audioSource.isPlaying)
         {
             audioSource.clip = audioClips[1];
-            audioSource.Play();
+            audioSource.Play(); // review(26.05.2024): это можно вынести из if-else, т.к. выполняется в любом случае
         }
         else
         {

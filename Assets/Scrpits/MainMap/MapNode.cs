@@ -21,8 +21,11 @@ class MapNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // review(26.05.2024): Тут как будто не хватает метода GetColorFromState, возвращающий цвет.
+        // review(26.05.2024): Почему бы не выделить enum NodeState { None, Visited, Enabled } ? Кмк так более описательно будет
         if (node.isVisited)
         {
+            // review(26.05.2024): Имеет смысл выделить SpriteRenderer в поле, чтобы каждый раз не запрашивать
             gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
             return;
         }
@@ -71,6 +74,7 @@ class MapNode : MonoBehaviour
 
     public bool Equals(MapNode other)
     {
+        // review(26.05.2024): Кажется, что две MapNode равны, если равны их id
         return gameObject.transform.position == other.gameObject.transform.position;
     }
 

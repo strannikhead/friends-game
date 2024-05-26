@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// review(26.05.2024): Название файла не соответствует названию класа
 public class Remaininglife : MonoBehaviour
 {
     private TextMeshProUGUI text;
@@ -15,6 +16,7 @@ public class Remaininglife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // review(26.05.2024): Действительно ли есть необходимость при каждом обновлении генерировать строку? Может быть, изменять текст только при изменении кол-ва жизней?
         text.text = $"Remaining lives: {Game.lives}";
     }
 }

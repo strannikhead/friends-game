@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -30,7 +31,15 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(string playerName, int score)
     {
-        ScoreEntry newScore = new ScoreEntry(playerName, score);
+        ScoreEntry newScore = new ScoreEntry(playerName, score); // review(26.05.2024): var
+
+        // review(26.05.2024): Через LINQ проще :)
+        // scoreBoard.highScores = scoreBoard.highScores
+        //     .Append(new ScoreEntry(playerName, score))
+        //     .OrderByDescending(x => x.score)
+        //     .Take(5)
+        //     .ToList();
+
         scoreBoard.highScores.Add(newScore);
 
         scoreBoard.highScores.Sort((x, y) => -y.score.CompareTo(x.score));
@@ -59,6 +68,7 @@ public class ScoreManager : MonoBehaviour
     }
 }
 
+// review(26.05.2024): Стоит вынести все классы в отдельные файлы
 [Serializable]
 public class ScoreEntry
 {
