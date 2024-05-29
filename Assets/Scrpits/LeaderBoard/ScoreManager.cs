@@ -31,21 +31,20 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(string playerName, int score)
     {
-        ScoreEntry newScore = new ScoreEntry(playerName, score); // review(26.05.2024): var
+        var newScore = new ScoreEntry(playerName, score);
 
-        // review(26.05.2024): Через LINQ проще :)
-        // scoreBoard.highScores = scoreBoard.highScores
-        //     .Append(new ScoreEntry(playerName, score))
-        //     .OrderByDescending(x => x.score)
-        //     .Take(5)
-        //     .ToList();
+        scoreBoard.highScores = scoreBoard.highScores
+            .Append(new ScoreEntry(playerName, score))
+            .OrderByDescending(x => x.score)
+            .Take(5)
+            .ToList();
 
-        scoreBoard.highScores.Add(newScore);
-
-        scoreBoard.highScores.Sort((x, y) => -y.score.CompareTo(x.score));
-
-        if (scoreBoard.highScores.Count > 5)
-            scoreBoard.highScores = scoreBoard.highScores.GetRange(0, 5);
+        // scoreBoard.highScores.Add(newScore);
+        //
+        // scoreBoard.highScores.Sort((x, y) => -y.score.CompareTo(x.score));
+        //
+        // if (scoreBoard.highScores.Count > 5)
+        //     scoreBoard.highScores = scoreBoard.highScores.GetRange(0, 5);
 
         SaveScores();
     }
@@ -65,30 +64,5 @@ public class ScoreManager : MonoBehaviour
     {
         scoreBoard = new ScoreBoard();
         SaveScores();
-    }
-}
-
-// review(26.05.2024): Стоит вынести все классы в отдельные файлы
-[Serializable]
-public class ScoreEntry
-{
-    public string playerName;
-    public int score;
-
-    public ScoreEntry(string playerName, int score)
-    {
-        this.playerName = playerName;
-        this.score = score;
-    }
-}
-
-[Serializable]
-public class ScoreBoard
-{
-    public List<ScoreEntry> highScores;
-
-    public ScoreBoard()
-    {
-        highScores = new List<ScoreEntry>();
     }
 }

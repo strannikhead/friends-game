@@ -645,10 +645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b289a691112854707b1a2a746ebb306f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreEntryTemplate: {fileID: 1350339868}
   scoreBoardContainer: {fileID: 1478759916}
   scoreRecordTemplate: {fileID: 2003371723}
-  spacing: 60
 --- !u!1 &1007498606
 GameObject:
   m_ObjectHideFlags: 0
