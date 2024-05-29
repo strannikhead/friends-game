@@ -35,7 +35,6 @@ public class LeaderBoard : MonoBehaviour
             scoreEntry.SetActive(true);
             var scoreText = scoreEntry.GetComponentInChildren<TextMeshProUGUI>();
 
-            // review(26.05.2024): Помимо просто лога стоит просто прекращать цикл, либо continue
             if (scoreText == null)
             {
                 Debug.Log("Кнопки не найдено");

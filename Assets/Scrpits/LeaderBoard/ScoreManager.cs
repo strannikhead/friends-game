@@ -31,20 +31,11 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(string playerName, int score)
     {
-        var newScore = new ScoreEntry(playerName, score);
-
         scoreBoard.highScores = scoreBoard.highScores
             .Append(new ScoreEntry(playerName, score))
             .OrderByDescending(x => x.score)
             .Take(5)
             .ToList();
-
-        // scoreBoard.highScores.Add(newScore);
-        //
-        // scoreBoard.highScores.Sort((x, y) => -y.score.CompareTo(x.score));
-        //
-        // if (scoreBoard.highScores.Count > 5)
-        //     scoreBoard.highScores = scoreBoard.highScores.GetRange(0, 5);
 
         SaveScores();
     }

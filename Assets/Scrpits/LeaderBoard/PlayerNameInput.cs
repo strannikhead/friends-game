@@ -11,7 +11,6 @@ public class PlayerNameInput : MonoBehaviour
     public TMP_InputField inputField;
     private string playerName;
 
-    // Метод для получения имени игрока
     public void UpdateResults()
     {
         var scoreManager = FindObjectOfType<ScoreManager>();
