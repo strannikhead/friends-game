@@ -26,16 +26,14 @@ public class Escape : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            // review(26.05.2024): Может, инапсулируем логику с Game внутри Game?
-            Game.lives += 1;
-            Game.levelScore = 0;
+            //(29.05.2024) refactored // review(26.05.2024): Может, инапсулируем логику с Game внутри Game?
+            Game.EndLevel();
             TimeSystem.Stop();
             UI.SetActive(false);
             player.SetActive(false);
             eventSystem?.SetActive(false);
-            // review(26.05.2024): Как тебе идея инкапсулировать работу с MapModel внутри MapModel? Тогда, возможно, даже не понадобится наружу выставлять playerPos
-            MapModel.playerPos.node.isVisited = true;
-            MapModel.playerPos.EnableNeibors();
+            //(29.05.2024) refactored // review(26.05.2024): Как тебе идея инкапсулировать работу с MapModel внутри MapModel? Тогда, возможно, даже не понадобится наружу выставлять playerPos
+            MapModel.CompleteCurrentLevel();
             SceneManager.LoadScene("ScoreScene", LoadSceneMode.Additive);
         }
     }

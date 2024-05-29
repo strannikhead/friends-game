@@ -30,7 +30,7 @@ public class ContinueWithLife : MonoBehaviour
     private IEnumerator Unload()
     {
         yield return new WaitForSeconds(0.5f);
-        SceneManager.UnloadSceneAsync(MapModel.playerPos.sceneName);
+        SceneManager.UnloadSceneAsync(MapModel.PlayerPosition.sceneName);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

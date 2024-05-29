@@ -20,7 +20,7 @@ public class Continue : MonoBehaviour
 
     public void Unload()
     {
-        SceneManager.UnloadSceneAsync(MapModel.playerPos.sceneName);
+        SceneManager.UnloadSceneAsync(MapModel.PlayerPosition.sceneName);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

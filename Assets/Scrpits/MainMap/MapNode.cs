@@ -9,32 +9,34 @@ class MapNode : MonoBehaviour
 {
     public string sceneName => node.SceneName;
     [SerializeField]
-    private List<MapNode> neighbors;
-    [SerializeField]
     public int id;
-    public Node node => MapModel.nodes[id];
+    public Node node => MapModel.Nodes[id];
+    [SerializeField]
+    private List<MapNode> neighbors;
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // review(26.05.2024): Тут как будто не хватает метода GetColorFromState, возвращающий цвет.
-        // review(26.05.2024): Почему бы не выделить enum NodeState { None, Visited, Enabled } ? Кмк так более описательно будет
+        // Сделать действительно можно, но очень уж геморно)) // review(26.05.2024): Почему бы не выделить enum NodeState { None, Visited, Enabled } ? Кмк так более описательно будет
         if (node.isVisited)
         {
-            // review(26.05.2024): Имеет смысл выделить SpriteRenderer в поле, чтобы каждый раз не запрашивать
-            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            //(29.05.2024) refactored // review(26.05.2024): Имеет смысл выделить SpriteRenderer в поле, чтобы каждый раз не запрашивать
+            spriteRenderer.color = Color.yellow;
             return;
         }
         if (node.isEnabled)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            spriteRenderer.color = Color.white;
             return;
         }
-        gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        spriteRenderer.color = Color.black;
     }
 
     public void Enable()
@@ -57,7 +59,7 @@ class MapNode : MonoBehaviour
 
     public void EnableNeibors()
     {
-        var neibors = node.NeiborIds.Select(x => MapModel.nodes[x]);
+        var neibors = node.NeiborIds.Select(x => MapModel.Nodes[x]);
         foreach (var neighbor in neibors)
         {
             neighbor.isEnabled = true;

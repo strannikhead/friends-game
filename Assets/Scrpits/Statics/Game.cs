@@ -15,4 +15,9 @@ public static class Game
         score = 0;
         levelScore = 0;
     }
+
+    public static void EndLevel()
+    {
+
+    }
 }
