@@ -19,6 +19,8 @@ public class ScenePointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // review(26.05.2024):  Думаю, что не стоит на каждый update делать сущности актинвыми. Достаточно сделать это один раз при открытии MainMap
+        // review(26.05.2024): Условие какое-то неочевидное. Может, поменять на "ТекущаяСцена == (включает в себя) MainMap) ?
         if (SceneManager.loadedSceneCount == 1)
         {
             player.SetActive(true);

@@ -31,6 +31,7 @@ public class MainMapPlayer : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
+            // review(26.05.2024): Rider мне подсказывает, что лучше инициализировать камеру в Start и переиспользовать поле (особенно если камера всегда одна)
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var targetNode = Physics2D.OverlapPointAll(mousePos)
                 .Select(obj => obj.gameObject.GetComponent<MapNode>())
@@ -43,6 +44,7 @@ public class MainMapPlayer : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // review(26.05.2024): Может, инкапсулировать логику с загрузкой сцены в MapModel?
             if (!MapModel.playerPos.node.isVisited)
             {
                 MapModel.playerPos.LoadThisScene();
@@ -58,6 +60,7 @@ public class MainMapPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // review(26.05.2024): Может быть, делать это только если velocity != Vector3.zero? Чтобы зря transform не изменять и не запрашивать. Это может быть затратным
         transform.position += velocity * Time.deltaTime;
     }
 
@@ -66,6 +69,7 @@ public class MainMapPlayer : MonoBehaviour
         velocity = (newPosition - transform.position) / movingTime;
         yield return new WaitForSeconds(movingTime);
         velocity = Vector3.zero;
+        // review(26.05.2024): Опять же я бы эту логику инкапсулировал в MapModel
         if (MapModel.playerPos.node.isVisited)
         {
             MapModel.playerPos.EnableNeibors();

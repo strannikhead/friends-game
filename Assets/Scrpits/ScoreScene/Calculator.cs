@@ -23,7 +23,7 @@ public class Calculator : MonoBehaviour
         countedTime = 0;
         elapsedTime = TimeSystem.ElapsedTime;
         levelInfo = Levels.levels
-            [MapModel.playerPos.sceneName];
+            [MapModel.playerPos.sceneName]; // review(26.05.2024): Давай вернем индекс на место
         timeTreshold = levelInfo.TimeTreshold;
         timeBonus = levelInfo.MaxTimeBonus;
     }
@@ -34,7 +34,9 @@ public class Calculator : MonoBehaviour
         {
             var delta = Time.deltaTime * fillingSpeed;
             countedTime += delta;
-            timeBonus = timeBonus > 0 ? timeBonus - delta * levelInfo.TimeRatio : 0;
+            // review(26.05.2024): Это все равно потенциально не спасает от отрицательного бонуса. Давай вместо этой проверки сделаем 
+            // review(26.05.2024): timeBonus = Math.Max(0, timeBonus - DELTA);
+            timeBonus = timeBonus > 0 ? timeBonus - delta * levelInfo.TimeRatio : 0; 
         }
         else if (!isScored)
         {

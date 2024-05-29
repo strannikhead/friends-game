@@ -51,6 +51,8 @@ public class HookSpot : MonoBehaviour
             }
             return;
         }
+
+        // review(26.05.2024): тут прямо напрашивается выделение функции IsRayHit
         var ray = Physics2D.RaycastAll(transform.position, player.transform.position - transform.position);
         var rayHit = false;
         foreach (var hit in ray)
@@ -60,6 +62,8 @@ public class HookSpot : MonoBehaviour
                 rayHit = false;
                 break;
             }
+
+            // review(26.05.2024): Используй CompareTag, так эффективнее
             if (hit.collider.tag == "Player")
             {
                 rayHit = true;
@@ -78,6 +82,7 @@ public class HookSpot : MonoBehaviour
         {
             if (instanciatedSpot != null)
             {
+                // review(26.05.2024): Логика дублируется выше. Давай выделим метод для очистки instanciatedSpot (причем прямо вместе с if-ом можно - ClearIfNeeded())
                 Destroy(instanciatedSpot);
                 isHookable = false;
                 instanciatedSpot = null;

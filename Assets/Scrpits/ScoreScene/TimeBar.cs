@@ -19,6 +19,7 @@ public class TimeBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // review(26.05.2024): var
         float barProgress = calculator.countedTime / calculator.timeTreshold;
         image.fillAmount = barProgress < 1 ? barProgress : 1; 
         float red = barProgress < 0.5f ? barProgress * 2 : 1;
