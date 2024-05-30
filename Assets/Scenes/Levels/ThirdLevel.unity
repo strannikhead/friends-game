@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Escape
       objectReference: {fileID: 0}
+    - target: {fileID: 6695780366148258112, guid: 4050333970d896c4c8c19872a01e77bd, type: 3}
+      propertyPath: targetSceneName
+      value: FinalScoreScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

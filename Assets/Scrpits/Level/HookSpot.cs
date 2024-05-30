@@ -83,7 +83,7 @@ public class HookSpot : MonoBehaviour
                 return false;
             }
 
-            // review(26.05.2024): Используй CompareTag, так эффективнее
+            //refactored (29.05.2024) // review(26.05.2024): Используй CompareTag, так эффективнее
             if (hit.collider.tag == "Player")
             {
                 return true;

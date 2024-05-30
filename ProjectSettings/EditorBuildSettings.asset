@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Tutorial.unity
     guid: e90e36ae961e3574aa25abc51248c86a
+  - enabled: 1
+    path: Assets/Scenes/FinalScoreScene.unity
+    guid: 97a8c60ec2df1c448b5259c6ef5b4edb
+  - enabled: 1
+    path: Assets/Scenes/LeaderBoard/EndScreenWithNameEntry.unity
+    guid: 6382c7d6467bd4c9eb054b39866791f4
   m_configObjects: {}

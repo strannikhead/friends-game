@@ -8,6 +8,8 @@ public class Escape : MonoBehaviour
     private GameObject UI;
     private GameObject player;
     private GameObject eventSystem;
+    [SerializeField]
+    private string targetSceneName;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class Escape : MonoBehaviour
             eventSystem?.SetActive(false);
             //(29.05.2024) refactored // review(26.05.2024): Как тебе идея инкапсулировать работу с MapModel внутри MapModel? Тогда, возможно, даже не понадобится наружу выставлять playerPos
             MapModel.CompleteCurrentLevel();
-            SceneManager.LoadScene("ScoreScene", LoadSceneMode.Additive);
+            SceneManager.LoadScene(targetSceneName, LoadSceneMode.Additive);
         }
     }
 

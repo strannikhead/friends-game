@@ -76,8 +76,8 @@ class MapNode : MonoBehaviour
 
     public bool Equals(MapNode other)
     {
-        // review(26.05.2024): Кажется, что две MapNode равны, если равны их id
-        return gameObject.transform.position == other.gameObject.transform.position;
+        //refactored (30.05.2024) // review(26.05.2024): Кажется, что две MapNode равны, если равны их id
+        return id == other.id;
     }
 
     public void LoadThisScene()

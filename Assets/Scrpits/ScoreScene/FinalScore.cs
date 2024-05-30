@@ -20,7 +20,10 @@ public class FinalScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // review(26.05.2024): Как часто обновляется score? Действительно ли стоит перезаписывать текст на каждый Update?
-        textObject.text = Game.score.ToString();
+        // refactored (30.05.2024) // review(26.05.2024): Как часто обновляется score? Действительно ли стоит перезаписывать текст на каждый Update?
+        if (int.Parse(textObject.text) != Game.score)
+        {
+            textObject.text = Game.score.ToString();
+        }
     }
 }
