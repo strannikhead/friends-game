@@ -20,7 +20,7 @@ public class PlayerMovements : MonoBehaviour
     {
         if (player != null)
         {
-            if (player.isGrounded && !player.isLeftBlocked)
+            if (player.isGrounded && !player.isHolding)
                 StartWalkingAnimation();
             else
                 StopWalkingAnimation();

@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     private bool isRightBlocked => currentStates.Contains(States.RightBlocked);
     [SerializeField]
     private bool isRightHolding => currentHolds.Contains(Holds.Right);
-    private bool isHolding => isLeftHolding || isRightHolding;
+    public bool isHolding => isLeftHolding || isRightHolding;
     private bool isLeftTouched;
     private bool isRightTouched;
     private bool isMoving;
@@ -109,6 +109,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (var element in currentStates)
+        {
+            Debug.Log(element);
+        }
+        
         if (isGrounded && !isLeftBlocked && !isMoving && !isHolding) 
         {
             OnStartMoving?.Invoke();
@@ -122,8 +127,7 @@ public class Player : MonoBehaviour
         
         if (isHooking)
         {
-            lineRenderer.SetPosition(0, transform.position); // Начало луча в позиции объекта
-            lineRenderer.SetPosition(1, FindClosestHookPos().transform.position);
+            lineRenderer.SetPosition(0, transform.position);
         }
         
         xShift = Input.GetAxis("Horizontal");
@@ -154,6 +158,8 @@ public class Player : MonoBehaviour
             if (hookPos != null && hookPos.isHookable)
             {
                 OnHook?.Invoke();
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, hookPos.transform.position);
                 isHooking = true;
                 StartCoroutine(hookPos.EnterCooldown());
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
