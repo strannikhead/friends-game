@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
     public event Action OnJump;
     public event Action OnDash;
     public event Action OnHook;
-    public event Action OnMoving;
-    public event Action OnNotMoving;
+    public event Action OnStartMoving;
+    public event Action OnStopMoving;
     public event Action OnBonus;
     
     private enum States
@@ -61,7 +61,10 @@ public class Player : MonoBehaviour
     private bool isRightBlocked => currentStates.Contains(States.RightBlocked);
     [SerializeField]
     private bool isRightHolding => currentHolds.Contains(Holds.Right);
-    private bool isHolding => isLeftHolding || isRightHolding;
+    public bool isHolding => isLeftHolding || isRightHolding;
+    private bool isLeftTouched;
+    private bool isRightTouched;
+    private bool isMoving;
     [SerializeField]
     private bool isDashing = false;
     [SerializeField]
@@ -76,7 +79,11 @@ public class Player : MonoBehaviour
     private float dashRecharge = 0;
     private readonly float slidingDelay = 1f;
     private readonly Vector3 slidingAcceleration = new Vector3(0, -3f, 0);
-
+    
+    private LineRenderer lineRenderer;
+    private LineRenderer hookPosition;
+    private bool isHooking;
+    
     public void ApplyAcceleration(Vector3 acceleration)
     {
         this.acceleration += acceleration;
@@ -92,17 +99,36 @@ public class Player : MonoBehaviour
     {
         acceleration = normAcceleration;
         velocity = normVelocity;
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 2;
+        
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded && !isLeftBlocked)
+        foreach (var element in currentStates)
         {
-            OnMoving?.Invoke();
+            Debug.Log(element);
+        }
+        
+        if (isGrounded && !isLeftBlocked && !isMoving && !isHolding) 
+        {
+            OnStartMoving?.Invoke();
+            isMoving = true;
         }
         else
-            OnNotMoving?.Invoke();
+        {
+            OnStopMoving?.Invoke();
+            isMoving = false;
+        }
+        
+        if (isHooking)
+        {
+            lineRenderer.SetPosition(0, transform.position);
+        }
         
         xShift = Input.GetAxis("Horizontal");
         if (isDashing)
@@ -132,6 +158,9 @@ public class Player : MonoBehaviour
             if (hookPos != null && hookPos.isHookable)
             {
                 OnHook?.Invoke();
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, hookPos.transform.position);
+                isHooking = true;
                 StartCoroutine(hookPos.EnterCooldown());
                 StartCoroutine(DashTo(hookTime, 0, hookPos.transform.position, true));
             }
@@ -260,8 +289,15 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("LeftHoldable"))
         {
             direction = -1;
+            if (!isLeftTouched)
+            {
+                // повернули в сторону
+                isLeftTouched = true;
+                transform.Rotate(0, 180, 0);
+            }
             if (!isLeftHolding)
             {
+                isLeftTouched = false;
                 acceleration.x = 0;
                 currentStates.Add(States.LeftBlocked);
                 currentStates.Add(States.Grounded);
@@ -273,8 +309,15 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("RightHoldable"))
         {
             direction = 1;
+            if (!isRightTouched)
+            {
+                // повернули в сторону
+                isRightTouched = true;
+                transform.Rotate(0, 180, 0);
+            }
             if (!isRightHolding)
             {
+                isRightTouched = false;
                 acceleration.x = 0;
                 currentStates.Add(States.RightBlocked);
                 currentStates.Add(States.Grounded);
@@ -366,6 +409,9 @@ public class Player : MonoBehaviour
             dashRecharge = 1 / dashCooldown;
         }
         var direction = target - transform.position;
+
+        Ray ray = new Ray(transform.position, direction);
+        
         velocity = Vector3.zero;
         acceleration = Vector3.zero;
         yield return new WaitForSeconds(0.01f);
@@ -375,6 +421,10 @@ public class Player : MonoBehaviour
         {
             velocity = normVelocity * this.direction;
         }
+
+        isHooking = false;
+        lineRenderer.SetPosition(0, Vector3.zero); // Начало луча в позиции объекта
+        lineRenderer.SetPosition(1, Vector3.zero);
         isDashing = false;
     }
 }

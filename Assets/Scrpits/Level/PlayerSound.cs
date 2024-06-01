@@ -14,8 +14,8 @@ public class PlayerSound : MonoBehaviour
         player.OnJump += PlayJumpSound;
         player.OnDash += PlayDashSound;
         player.OnHook += PlayHookSound;
-        player.OnMoving += PlayMovingSound;
-        player.OnNotMoving += StopMovingSound;
+        player.OnStartMoving += PlayStartMovingSound;
+        player.OnStopMoving += StopMovingSound;
     }
 
     private void PlayJumpSound()
@@ -38,7 +38,7 @@ public class PlayerSound : MonoBehaviour
         audioSource.Play();
     }
 
-    private void PlayMovingSound()
+    private void PlayStartMovingSound()
     {
         if (audioSource.clip != clips[3] || !audioSource.isPlaying)
         {
