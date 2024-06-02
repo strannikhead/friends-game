@@ -5,6 +5,7 @@ public class ScenePointer : MonoBehaviour
 {
     public GameObject player;
     private GameObject map;
+    private GameObject ui;
     private GameObject sceneCamera;
     // Start is called before the first frame update
     void Start()
@@ -12,6 +13,7 @@ public class ScenePointer : MonoBehaviour
         player = FindAnyObjectByType<MainMapPlayer>().gameObject;
         map = GameObject.Find("Map");
         sceneCamera = GameObject.Find("Main Camera");
+        ui = GameObject.Find("UI");
     }
 
     // Update is called once per frame
@@ -33,6 +35,10 @@ public class ScenePointer : MonoBehaviour
             if (!sceneCamera.activeInHierarchy)
             {
                 sceneCamera.SetActive(true);
+            }
+            if (!ui.activeInHierarchy)
+            {
+                ui.SetActive(true);
             }
         }
     }

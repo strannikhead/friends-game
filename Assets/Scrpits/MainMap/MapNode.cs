@@ -84,6 +84,7 @@ class MapNode : MonoBehaviour
     {
         SceneManager.LoadScene(node.SceneName, LoadSceneMode.Additive);
         FindAnyObjectByType<MainMapPlayer>().gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("UI").SetActive(false);
         StartCoroutine(TurnSceneOff());
     }
 
