@@ -109,11 +109,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var element in currentStates)
-        {
-            Debug.Log(element);
-        }
-        
         if (isGrounded && !isLeftBlocked && !isMoving && !isHolding) 
         {
             OnStartMoving?.Invoke();
@@ -289,15 +284,9 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("LeftHoldable"))
         {
             direction = -1;
-            if (!isLeftTouched)
-            {
-                // повернули в сторону
-                isLeftTouched = true;
-                transform.Rotate(0, 180, 0);
-            }
             if (!isLeftHolding)
             {
-                isLeftTouched = false;
+                transform.Rotate(0, 180, 0);
                 acceleration.x = 0;
                 currentStates.Add(States.LeftBlocked);
                 currentStates.Add(States.Grounded);
@@ -309,15 +298,9 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("RightHoldable"))
         {
             direction = 1;
-            if (!isRightTouched)
-            {
-                // повернули в сторону
-                isRightTouched = true;
-                transform.Rotate(0, 180, 0);
-            }
             if (!isRightHolding)
             {
-                isRightTouched = false;
+                transform.Rotate(0, 180, 0);
                 acceleration.x = 0;
                 currentStates.Add(States.RightBlocked);
                 currentStates.Add(States.Grounded);
