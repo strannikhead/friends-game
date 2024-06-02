@@ -25,4 +25,6 @@ public class Menu : MonoBehaviour
         var scoreManager = FindObjectOfType<ScoreManager>();
         scoreManager.ResetRecords();
     }
+
+    public void QuitGame() => Application.Quit();
 }
