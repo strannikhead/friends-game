@@ -30,14 +30,14 @@ public class PlayerMovements : MonoBehaviour
     private void StartWalkingAnimation()
     {
         // review(26.05.2024): Я бы брал текущий layerIndex у gameObject игрока
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
+        if (!animator.GetCurrentAnimatorStateInfo(player.gameObject.layer).IsName("Movement"))
             animator.Play("Movement");
     }
 
 
     private void StopWalkingAnimation()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
+        if (animator.GetCurrentAnimatorStateInfo(player.gameObject.layer).IsName("Movement"))
             animator.Play("Movement", -1, 0f);
     }
 }
