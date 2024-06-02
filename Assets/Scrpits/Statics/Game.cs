@@ -18,6 +18,7 @@ public static class Game
 
     public static void EndLevel()
     {
-
+        levelScore = 0;
+        lives += 1;
     }
 }
