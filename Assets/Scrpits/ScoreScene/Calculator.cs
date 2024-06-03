@@ -36,7 +36,7 @@ public class Calculator : MonoBehaviour
             countedTime += delta;
             //(29.05.2024) refactored // review(26.05.2024): Это все равно потенциально не спасает от отрицательного бонуса. Давай вместо этой проверки сделаем 
             // review(26.05.2024): timeBonus = Math.Max(0, timeBonus - DELTA);
-            timeBonus = Math.Max(0, timeBonus - delta);
+            timeBonus = Math.Max(0, timeBonus - delta * levelInfo.TimeRatio);
         }
         else if (!isScored)
         {
