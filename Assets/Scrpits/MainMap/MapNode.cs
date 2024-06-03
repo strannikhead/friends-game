@@ -28,16 +28,17 @@ class MapNode : MonoBehaviour
         if (node.isVisited)
         {
             //(29.05.2024) refactored // review(26.05.2024): Имеет смысл выделить SpriteRenderer в поле, чтобы каждый раз не запрашивать
-            spriteRenderer.color = Color.yellow;
+            spriteRenderer.color = new Color(200/255f, 250/255f, 180/255f);
             return;
         }
         if (node.isEnabled)
         {
             // spriteRenderer.color = Color.white;
-            spriteRenderer.color = new Color(70, 70, 55);
+            spriteRenderer.color = new Color(100/255f, 210/255f, 110/255f);
             return;
         }
-        spriteRenderer.color = new Color(40, 40, 40);
+        // spriteRenderer.color = new Color(40, 40, 40);
+        spriteRenderer.color = new Color(40/255f, 40/255f, 40/255f);
     }
 
     public void Enable()
