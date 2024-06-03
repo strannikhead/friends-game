@@ -722,6 +722,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (101)
@@ -5657,6 +5661,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (99)
@@ -5967,6 +5975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (98)
@@ -8811,6 +8823,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (97)
@@ -11209,6 +11225,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (100)
@@ -12682,6 +12702,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6123812391465608078, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551793078855509571, guid: b42fb1aeb4908844ab7577e519f1e6de, type: 3}
       propertyPath: m_Name
       value: Grass (103)
