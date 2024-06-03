@@ -19,7 +19,7 @@ public class Remaininglife : MonoBehaviour
         //refactored (30.05.2024) // review(26.05.2024): Действительно ли есть необходимость при каждом обновлении генерировать строку? Может быть, изменять текст только при изменении кол-ва жизней?
         if (int.Parse(text.text.Split(':')[1]) != Game.lives)
         {
-            text.text = $"Remaining lives: {Game.lives}";
+            text.text = $"Осталось жизней: {Game.lives}";
         }
     }
 }
