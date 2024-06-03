@@ -33,10 +33,11 @@ class MapNode : MonoBehaviour
         }
         if (node.isEnabled)
         {
-            spriteRenderer.color = Color.white;
+            // spriteRenderer.color = Color.white;
+            spriteRenderer.color = new Color(70, 70, 55);
             return;
         }
-        spriteRenderer.color = Color.black;
+        spriteRenderer.color = new Color(40, 40, 40);
     }
 
     public void Enable()
