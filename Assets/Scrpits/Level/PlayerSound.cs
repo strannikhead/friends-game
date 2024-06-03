@@ -28,7 +28,7 @@ public class PlayerSound : MonoBehaviour
     private void PlayDashSound()
     {
         audioSource.clip = clips[1];
-        audioSource.volume = 0.3f;
+        audioSource.volume = 0.2f;
         audioSource.Play();
     }
     
