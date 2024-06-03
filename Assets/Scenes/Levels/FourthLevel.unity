@@ -878,7 +878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3656085304890537431, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
       propertyPath: m_SortingOrder
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1003,6 +1003,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8661165776722913328, guid: c6155ae1344c85f4794e031535897030, type: 3}
   m_PrefabInstance: {fileID: 1673881491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &145289505 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+  m_PrefabInstance: {fileID: 363726826}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &165699854
 PrefabInstance:
@@ -1775,6 +1780,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126209318}
     m_Modifications:
+    - target: {fileID: 475456581975593152, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874214663631133327, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
       propertyPath: m_Name
       value: Circle
@@ -1970,6 +1979,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8661165776722913328, guid: c6155ae1344c85f4794e031535897030, type: 3}
   m_PrefabInstance: {fileID: 1127507449}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &363726826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1126209318}
+    m_Modifications:
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 13.553161
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 79.60351
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.277161
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.31077418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350297453665225209, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922270182855763536, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_Name
+      value: LavaField (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656085304890537431, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
 --- !u!1001 &373821306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5071,6 +5145,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126209318}
     m_Modifications:
+    - target: {fileID: 475456581975593152, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874214663631133327, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
       propertyPath: m_Name
       value: Circle
@@ -6520,6 +6598,7 @@ Transform:
   - {fileID: 231777478}
   - {fileID: 427577609}
   - {fileID: 2124635306}
+  - {fileID: 145289505}
   - {fileID: 1695415565}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7940,7 +8019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3656085304890537431, guid: 3afffc5089d3d80448d0b1f2ea2e156a, type: 3}
       propertyPath: m_SortingOrder
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12897,6 +12976,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126209318}
     m_Modifications:
+    - target: {fileID: 475456581975593152, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874214663631133327, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
       propertyPath: m_Name
       value: Circle (2)
@@ -13125,6 +13208,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126209318}
     m_Modifications:
+    - target: {fileID: 475456581975593152, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874214663631133327, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
       propertyPath: m_Name
       value: Circle (1)
@@ -13251,6 +13338,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126209318}
     m_Modifications:
+    - target: {fileID: 475456581975593152, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874214663631133327, guid: 497f5c05379be114cb0eeca55003008b, type: 3}
       propertyPath: m_Name
       value: Circle

@@ -13,7 +13,8 @@ public class Escape : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UI = FindAnyObjectByType<Canvas>().gameObject;
+        UI = GameObject.Find("UI");
+        //UI = FindAnyObjectByType<Canvas>().gameObject;
         player = FindAnyObjectByType<Player>().gameObject;
         eventSystem = GameObject.Find("EventSystem");
     }
