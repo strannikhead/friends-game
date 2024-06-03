@@ -30,7 +30,7 @@ public class LeaderBoard : MonoBehaviour
         
         for (var i = 0; i < 5; i++)
         {
-            var score = i < recordCount ? highScores[i] : new ScoreEntry($"unknown", (5 - i) * 100);
+            var score = i < recordCount ? highScores[i] : new ScoreEntry($"unknown",0);
             var scoreEntry = Instantiate(scoreRecordTemplate, scoreBoardContainer);
             scoreEntry.SetActive(true);
             var scoreText = scoreEntry.GetComponentInChildren<TextMeshProUGUI>();
