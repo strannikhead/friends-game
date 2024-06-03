@@ -273,7 +273,7 @@ public class Player : MonoBehaviour
                 Game.score -= Game.levelScore; 
                 Game.levelScore = 0;
                 TimeSystem.Reset();
-                var UI = FindAnyObjectByType<Canvas>().gameObject;
+                var UI = GameObject.Find("UI").gameObject;
                 var eventSystem = GameObject.Find("EventSystem");
                 UI.SetActive(false);
                 eventSystem?.SetActive(false);

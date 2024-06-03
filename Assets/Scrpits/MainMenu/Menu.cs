@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     public void ChangeScene(string nextScene)
     {
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadSceneAsync(nextScene);
     }
 
     public void ResetLeaderBoard()
