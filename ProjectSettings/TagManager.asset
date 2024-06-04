@@ -19,6 +19,7 @@ TagManager:
   - Hint
   - Change
   - Disable
+  - Tutorial Death
   layers:
   - Default
   - TransparentFX

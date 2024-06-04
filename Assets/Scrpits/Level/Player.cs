@@ -249,6 +249,10 @@ public class Player : MonoBehaviour
         {
             currentStates.Add(States.RightBlocked);
         }
+        if (collision.CompareTag("Tutorial Death"))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
         if (collision.CompareTag("Ground"))
         {
             currentStates.Add(States.Grounded);
