@@ -7,24 +7,21 @@ using UnityEngine.UI;
 
 public class ContinueWithLife : MonoBehaviour
 {
-    [SerializeField]
-    private Button button;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(Decrement());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
-    public void Continue()
+    private IEnumerator Decrement()
     {
+        yield return new WaitForSeconds(0.5f);
         Game.lives--;
-        button.interactable = false;
         StartCoroutine(Unload());
     }
     private IEnumerator Unload()
