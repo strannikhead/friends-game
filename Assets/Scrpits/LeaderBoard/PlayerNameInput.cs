@@ -18,7 +18,8 @@ public class PlayerNameInput : MonoBehaviour
         scoreManager.AddScore(playerName, Game.score);
         SceneManager.LoadScene("MainMenu");
     }
-    
+
+    // review(29.06.2024): На самом деле этот метод не получает имя игрока, а устанавливает его. Стоит ли тогда в принципе хранить имя в поле?
     private void GetPlayerName()
     {
         playerName = inputField.text;

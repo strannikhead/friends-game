@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class Levels
 {
+    // review(29.06.2024): public static readonly
     public readonly static Dictionary<string, LevelInfo> LevelsDict = new Dictionary<string, LevelInfo> //(29.05.2024) refactored // review(26.05.2024): Давай с заглавной буквы + readonly
     {
         {"FirstLevel", new LevelInfo(1000, 19, 20)},

@@ -14,7 +14,7 @@ public class Escape : MonoBehaviour
     void Start()
     {
         UI = GameObject.Find("UI");
-        //UI = FindAnyObjectByType<Canvas>().gameObject;
+        //UI = FindAnyObjectByType<Canvas>().gameObject; // review(29.06.2024): ненужные комменты лучше убирать
         player = FindAnyObjectByType<Player>().gameObject;
         eventSystem = GameObject.Find("EventSystem");
     }

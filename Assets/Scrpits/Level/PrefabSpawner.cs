@@ -20,7 +20,7 @@ public class PrefabSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null && !isSpawning) 
+        if (target == null && !isSpawning) // review(29.06.2024): Разве после спавна target не всегда будет != null? Если так, то можно было оставить только проверку на isSpawning, потому что судя по подсказкам Rider сравнение на null GameObject-ов - затратная операция
         {
             isSpawning = true;
             StartCoroutine(Spawn());

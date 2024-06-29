@@ -18,7 +18,7 @@ public class PlayerMovements : MonoBehaviour
     
     private void Update()
     {
-        if (player != null)
+        if (player != null) // review(29.06.2024): А зачем эта проверка? Кажется, что Player всегда должен быть
         {
             if (player.isGrounded && !player.isHolding)
                 StartWalkingAnimation();

@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
     public event Action OnStartMoving;
     public event Action OnStopMoving;
     public event Action OnBonus;
-    
+
+    // review(29.06.2024): PlayerStates. И стоило вынести в отедльный файл
     private enum States
     {
         Grounded,
@@ -397,7 +398,7 @@ public class Player : MonoBehaviour
         }
         var direction = target - transform.position;
 
-        Ray ray = new Ray(transform.position, direction);
+        Ray ray = new Ray(transform.position, direction); // review(29.06.2024): Неиспользуемые объекты лучше не создавать
         
         velocity = Vector3.zero;
         acceleration = Vector3.zero;

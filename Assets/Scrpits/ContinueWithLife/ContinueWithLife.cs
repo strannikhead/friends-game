@@ -13,6 +13,7 @@ public class ContinueWithLife : MonoBehaviour
         StartCoroutine(Decrement());
     }
 
+    // review(29.06.2024): Ненужные методы стоит удалять
     // Update is called once per frame
     void Update()
     {
@@ -21,12 +22,13 @@ public class ContinueWithLife : MonoBehaviour
     private IEnumerator Decrement()
     {
         yield return new WaitForSeconds(0.5f);
-        Game.lives--;
-        StartCoroutine(Unload());
+        Game.lives--;             // review(29.06.2024): Изменять публичные поля - плохо, как и сами публичные поля
+        StartCoroutine(Unload()); // review(29.06.2024): А зачем стартовать корутину в корутине?
     }
     private IEnumerator Unload()
     {
         yield return new WaitForSeconds(0.5f);
+        // review(29.06.2024): Я бы выделил отдельный хелпер, который бы внутри себя инкапсулировал вызов этих двух методов
         SceneManager.UnloadSceneAsync(MapModel.PlayerPosition.sceneName);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
