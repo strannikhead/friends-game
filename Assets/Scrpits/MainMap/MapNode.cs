@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,19 +26,15 @@ class MapNode : MonoBehaviour
     {
         // review(26.05.2024): Тут как будто не хватает метода GetColorFromState, возвращающий цвет.
         // Сделать действительно можно, но очень уж геморно)) // review(26.05.2024): Почему бы не выделить enum NodeState { None, Visited, Enabled } ? Кмк так более описательно будет
-        if (node.isVisited)
+        // review(29.06.2024): Вот я сделал не геморно, вроде. Даже особо ничего не менял
+        var color = node.State switch
         {
-            //(29.05.2024) refactored // review(26.05.2024): Имеет смысл выделить SpriteRenderer в поле, чтобы каждый раз не запрашивать
-            spriteRenderer.color = new Color(200/255f, 250/255f, 180/255f);
-            return;
-        }
-        if (node.isEnabled)
-        {
-            spriteRenderer.color = Color.white;
-            // spriteRenderer.color = new Color(100/255f, 210/255f, 110/255f);
-            return;
-        }
-        spriteRenderer.color = new Color(40/255f, 40/255f, 40/255f);
+            NodeState.None    => new Color(40/255f, 40/255f, 40/255f),
+            NodeState.Visited => new Color(200/255f, 250/255f, 180/255f),
+            NodeState.Enabled => Color.white,
+            _                 => throw new ArgumentOutOfRangeException()
+        };
+        spriteRenderer.color = color;
     }
 
     public void Enable()
@@ -63,6 +60,7 @@ class MapNode : MonoBehaviour
         var neibors = node.NeiborIds.Select(x => MapModel.Nodes[x]);
         foreach (var neighbor in neibors)
         {
+            // review(29.06.2024): Разве тут не должна быть проверка на visited?
             neighbor.isEnabled = true;
         }
     }

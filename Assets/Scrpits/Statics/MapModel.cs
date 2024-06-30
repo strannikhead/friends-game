@@ -56,14 +56,32 @@ static class MapModel
     }
 }
 
+public enum NodeState
+{
+    None,
+    Visited,
+    Enabled
+}
+// review(29.06.2024): Стоит вынести в отдельный файл
 class Node
 {
     public int[] NeiborIds;
     public int id;
-    public bool isVisited;
-    public bool isEnabled;
+
+    public bool isVisited
+    {
+        get => State == NodeState.Visited;
+        set => State = NodeState.Visited;
+    }
+
+    public bool isEnabled
+    {
+        get => State == NodeState.Enabled;
+        set => State = NodeState.Enabled;
+    }
     public string SceneName;
     public MapNode MapNode;
+    public NodeState State { get; private set; }
 
     public Node(int[] neiborIds, int id, string sceneName)
     {

@@ -23,7 +23,7 @@ public class HintChanger : MonoBehaviour
     public void ShowNextHint()
     {
         hints[pointer].SetActive(false);
-        pointer++;
+        pointer++; // review(29.06.2024): А что если pointer >= hints.Length?
         hints[pointer].SetActive(true);
     }
 

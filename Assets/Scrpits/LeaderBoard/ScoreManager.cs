@@ -24,6 +24,7 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
+            // review(29.06.2024): Дублирует ResetScores()
             scoreBoard = new ScoreBoard();
             SaveScores();
         }
@@ -31,10 +32,10 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(string playerName, int score)
     {
-        scoreBoard.highScores = scoreBoard.highScores
+        scoreBoard.highScores = scoreBoard.highScores // review(29.06.2024): Изменять (и создавать) публичные поля - опасно и вносит путаницу. Стоило в ScoreBoard добавить метод типа Add(ScoreEntry entry)
             .Append(new ScoreEntry(playerName, score))
             .OrderByDescending(x => x.score)
-            .Take(5)
+            .Take(5) // review(29.06.2024): магическая константа. Что-то мне подсказывает, что она как-то связана с View (LeaderBoard)
             .ToList();
 
         SaveScores();

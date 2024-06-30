@@ -17,6 +17,6 @@ public class RemainingTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textObject.text = (calculator.elapsedTime - calculator.countedTime).ToString("0.00");
+        textObject.text = (calculator.elapsedTime - calculator.countedTime).ToString("0.00"); // review(29.06.2024): Как будто можно было в калькулятор добавить метод GetRemainingTime
     }
 }

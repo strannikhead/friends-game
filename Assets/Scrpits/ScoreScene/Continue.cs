@@ -20,6 +20,7 @@ public class Continue : MonoBehaviour
 
     public void Unload()
     {
+        // review(29.06.2024): Определенно, стоит это куда-то инкапсулировать, как и код по загрузке сцены
         SceneManager.UnloadSceneAsync(MapModel.PlayerPosition.sceneName);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }

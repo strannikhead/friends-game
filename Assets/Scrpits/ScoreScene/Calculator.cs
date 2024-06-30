@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// review(29.06.2024):  Это больше похоже на какой-то TimeCounter
 public class Calculator : MonoBehaviour
 {
     [SerializeField]

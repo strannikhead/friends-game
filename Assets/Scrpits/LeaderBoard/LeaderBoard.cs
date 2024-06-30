@@ -24,14 +24,15 @@ public class LeaderBoard : MonoBehaviour
         foreach (Transform child in scoreBoardContainer)
             Destroy(child.gameObject);
         
-        var scoreManager = FindObjectOfType<ScoreManager>();
+        var scoreManager = FindObjectOfType<ScoreManager>(); // review(29.06.2024): Правда ли, что scoreManager-а нужно искать на каждый update?
         var highScores = scoreManager.GetHighScores();
         var recordCount = highScores.Count;
         
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++) // review(29.06.2024): Почему 5? Выглядит как магическое число. Наверное, стоит выделить в поле
         {
             var score = i < recordCount ? highScores[i] : new ScoreEntry($"unknown",0);
-            var scoreEntry = Instantiate(scoreRecordTemplate, scoreBoardContainer);
+            // review(29.06.2024): Как будто не хватает отдельного объекта, который бы инкапсулировал в себе логику инициализации
+            var scoreEntry = Instantiate(scoreRecordTemplate, scoreBoardContainer); // review(29.06.2024): scoreObject или типа того. Просто в проекте уже есть ScoreEntry, и данное название может запутать
             scoreEntry.SetActive(true);
             var scoreText = scoreEntry.GetComponentInChildren<TextMeshProUGUI>();
 
